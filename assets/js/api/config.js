@@ -1,17 +1,16 @@
 export var pythonURI;
 if (location.hostname === "localhost") {
-        pythonURI = "http://localhost:8086";
+        pythonURI = "http://localhost:8087";
 } else if (location.hostname === "127.0.0.1") {
-        pythonURI = "http://127.0.0.1:8086";
+        pythonURI = "http://127.0.0.1:8087";
 } else {
-        pythonURI = "https://flask.nighthawkcodingsociety.com";
+        pythonURI =  "https://flask2025.nighthawkcodingsociety.com";
 }
-
 export var javaURI;
 if (location.hostname === "localhost") {
         javaURI = "http://localhost:8085";
 } else if (location.hostname === "127.0.0.1") {
-        javaURI = "http://127.0.0.1:8085";
+        javaURI = "http://127.0.0.1:8085"; //rey
 } else {
         javaURI = "https://spring.nighthawkcodingsociety.com";
 }
@@ -23,10 +22,10 @@ export const fetchOptions = {
     credentials: 'include', // include, same-origin, omit
     headers: {
         'Content-Type': 'application/json',
-        'X-Origin': 'client' // New custom header to identify so
+        'X-Origin': 'client' // New custom header to identify source
     },
 };
-
+// User Login Function 
 export function login(options) {
         // Modify the options to use the POST method and include the request body.
         const requestOptions  = {
@@ -44,14 +43,13 @@ export function login(options) {
         .then(response => {
                 // Trap error response from Web API
                 if (!response.ok) {
-                const errorMsg = 'Login error: ' + response.status;
-                console.log(errorMsg);
-                document.getElementById(options.message).textContent = errorMsg;
-                return;
+                        const errorMsg = 'Login error: ' + response.status;
+                        console.log(errorMsg);
+                        document.getElementById(options.message).textContent = errorMsg;
+                        return;
                 }
                 // Success!!!
                 // Redirect to the Database location
-                document.getElementById(options.message).textContent = "Success: " + document.getElementById("uid").value 
                 options.callback();
         })
         .catch(error => {
@@ -60,3 +58,4 @@ export function login(options) {
                 document.getElementById(options.message).textContent = 'Possible CORS or service down error: ' + error;
         });
 }
+
